@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Update and upgrade all packages
+      apt:
+        update_cache: yes
+        upgrade: dist
+
+    - name: Install security patches
+      apt:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - nginx
+        - php
+        - postgresql
+        - varnish

@@ -1,0 +1,16 @@
+all:
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  children:
+    webservers:
+      hosts:
+        prod-webserver1:
+          ansible_host: 192.168.1.100
+          ansible_user: ubuntu
+          ansible_ssh_private_key_file: ~/.ssh/prod_id_rsa
+    dbservers:
+      hosts:
+        prod-dbserver1:
+          ansible_host: 192.168.1.101
+          ansible_user: ubuntu
+          ansible_ssh_private_key_file: ~/.ssh/prod_id_rsa

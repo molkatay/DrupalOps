@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Ensure backup directory exists on host
+      file:
+        path: "{{ backup_dir }}"
+        state: directory
+
+    - name: Dump Drupal database using a temporary Drush container
+      command: >
+        docker run --rm --network {{ docker_network }} -v {{ backup_dir }}:/backups drush/drush:latest
+        sql-dump --result-file=/backups/{{ backup_file }} --gzip --db-url={{ db_url }}
+      vars:
+        backup_dir: ~/drupal_backups
+        backup_file: drupal_backup.sql.gz
+        docker_network: your_network_name
+        db_url: mysql://dbuser:dbpassword@db_container_name/dbname

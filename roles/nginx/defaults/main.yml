@@ -1,0 +1,3 @@
+nginx_port: 80
+nginx_server_name: druxt_events.com
+nginx_document_root: /var/www/html

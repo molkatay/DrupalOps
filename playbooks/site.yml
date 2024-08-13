@@ -1,0 +1,13 @@
+---
+- hosts: webservers
+  become: yes
+  roles:
+    - geerlingguy.nginx
+    - geerlingguy.php
+    - geerlingguy.varnish
+    - geerlingguy.drupal
+
+- hosts: dbservers
+  become: yes
+  roles:
+    - geerlingguy.postgresql
